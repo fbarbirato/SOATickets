@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Model\EventUnitTests.cs" />
     <Compile Include="Model\TicketPurchaseFactoryUnitTests.cs" />
+    <Compile Include="Model\TicketReservationFactoryUnitTestscs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\TicketReservationUnitTests.cs" />
   </ItemGroup>
