@@ -54,5 +54,29 @@ namespace Tickets.Model
         {
             return ReservedTickets.Exists(t => t.Id == reservationId);
         }
+
+        public string DetermineWhyATicketCannotBePurchasedWith(Guid reservationId)
+        {
+            string reservationIssue = "";
+
+            if (HasReservationWith(reservationId))
+            {
+                TicketReservation reservation = GetReservationWith(reservationId);
+                if (reservation.HasExpired())
+                {
+                    reservationIssue = String.Format("Ticket reservation '{0}' has expired", reservationId.ToString());
+                }
+                else if (reservation.HasBeenRedeemed)
+                {
+                    reservationIssue = String.Format("Ticket reservation '{0}' has already been redeemed", reservationId.ToString());
+                }
+            }
+            else
+            {
+                reservationIssue = String.Format("There is no ticket reservation with the Id '{0}'", reservationId.ToString());
+            }
+
+            return reservationIssue;
+        }
     }
 }

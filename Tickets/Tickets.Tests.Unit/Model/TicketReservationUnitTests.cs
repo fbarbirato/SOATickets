@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tickets.Model;
+using FluentAssertions;
 
 namespace Tickets.Tests.Unit.Model
 {
@@ -20,7 +21,7 @@ namespace Tickets.Tests.Unit.Model
             bool result = reservation.HasExpired();
 
             //assert
-            Assert.IsTrue(result);
+            result.Should().BeTrue();
         }
 
         [TestMethod]
@@ -36,7 +37,7 @@ namespace Tickets.Tests.Unit.Model
             bool result = reservation.HasExpired();
 
             //assert
-            Assert.IsFalse(result);
+            result.Should().BeFalse();
         }
 
         [TestMethod]
@@ -53,7 +54,7 @@ namespace Tickets.Tests.Unit.Model
             bool result = reservation.StillActive();
 
             //assert
-            Assert.IsTrue(result);
+            result.Should().BeTrue();
         }
 
         [TestMethod]
@@ -70,7 +71,7 @@ namespace Tickets.Tests.Unit.Model
             bool result = reservation.StillActive();
 
             //assert
-            Assert.IsFalse(result);
+            result.Should().BeFalse();
         }
 
         [TestMethod]
@@ -87,7 +88,7 @@ namespace Tickets.Tests.Unit.Model
             bool result = reservation.StillActive();
 
             //assert
-            Assert.IsFalse(result);
+            result.Should().BeFalse();
         }
 
         [TestMethod]
@@ -104,7 +105,7 @@ namespace Tickets.Tests.Unit.Model
             bool result = reservation.StillActive();
 
             //assert
-            Assert.IsFalse(result);
+            result.Should().BeFalse();
         }
     }
 }

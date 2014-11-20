@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tickets.Model;
+using FluentAssertions;
 
 namespace Tickets.Tests.Unit.Model
 {
@@ -21,9 +22,9 @@ namespace Tickets.Tests.Unit.Model
             var createdTicketReservation = TicketReservationFactory.CreateReservation(Event, ticketQuantity);
 
             //assert
-            Assert.IsInstanceOfType(createdTicketReservation, typeof(TicketReservation));
-            Assert.AreEqual(Event.Id, createdTicketReservation.Event.Id);
-            Assert.AreEqual(ticketQuantity, createdTicketReservation.TicketQuantity);
+            createdTicketReservation.Should().BeOfType<TicketReservation>();
+            createdTicketReservation.Event.Id.Should().Be(Event.Id);
+            createdTicketReservation.TicketQuantity.Should().Be(ticketQuantity);
         }
     }
 }
