@@ -29,5 +29,30 @@ namespace Tickets.Model
 
             return Allocation - salesAndReservations;
         }
+
+        public bool CanPurchaseTicketWith(Guid reservationId)
+        {
+            if (HasReservationWith(reservationId))
+            {
+                return GetReservationWith(reservationId).StillActive();
+            }
+
+            return false;
+        }
+
+        private TicketReservation GetReservationWith(Guid reservationId)
+        {
+            if (!HasReservationWith(reservationId))
+            {
+                throw new ApplicationException(String.Format("No reservation ticket with matching id of '{0}'", reservationId.ToString()));
+            }
+
+            return ReservedTickets.FirstOrDefault(t => t.Id == reservationId);
+        }
+
+        private bool HasReservationWith(Guid reservationId)
+        {
+            return ReservedTickets.Exists(t => t.Id == reservationId);
+        }
     }
 }

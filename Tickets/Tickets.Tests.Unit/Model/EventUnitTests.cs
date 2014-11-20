@@ -42,5 +42,103 @@ namespace Tickets.Tests.Unit.Model
             //assert
             Assert.AreEqual(80, result);
         }
+
+        [TestMethod]
+        public void CanPurchaseTicketWith_HasReservationAndStillActive_ReturnsTrue()
+        {
+            //arrange
+            var reservationId = Guid.NewGuid();
+
+            var Event = new Event
+            {
+                Id = reservationId,
+                Name = "Test Event",
+                Allocation = 100,
+                ReservedTickets = new List<TicketReservation>()
+                {
+                    new TicketReservation
+                    {
+                        Id = reservationId,
+                        ExpiryTime = DateTime.Now.AddHours(2),
+                        TicketQuantity = 2,
+                        HasBeenRedeemed = false
+                    }
+                }
+            };
+
+            //act
+            bool result = Event.CanPurchaseTicketWith(reservationId);
+
+            //assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void CanPurchaseTicketWith_HasReservationButNotStillActive_ReturnsFalse()
+        {
+            //arrange
+            var reservationId = Guid.NewGuid();
+
+            var Event = new Event
+            {
+                Id = reservationId,
+                Name = "Test Event",
+                Allocation = 100,
+                ReservedTickets = new List<TicketReservation>()
+                {
+                    new TicketReservation
+                    {
+                        Id = reservationId,
+                        ExpiryTime = DateTime.Now.AddHours(-1),
+                        TicketQuantity = 2,
+                        HasBeenRedeemed = true
+                    }
+                }
+            };
+
+            //act
+            bool result = Event.CanPurchaseTicketWith(reservationId);
+
+            //assert
+            Assert.IsFalse(result);
+        }
+
+
+        [TestMethod]
+        public void CanPurchaseTicketWith_DoesNotHaveReservation_ReturnsFalse()
+        {
+            //arrange
+            var reservationId = Guid.NewGuid();
+
+            var Event = new Event
+            {
+                Id = reservationId,
+                Name = "Test Event",
+                Allocation = 100,
+                ReservedTickets = new List<TicketReservation>()
+                {
+                    new TicketReservation
+                    {
+                        Id = Guid.NewGuid(),
+                        ExpiryTime = DateTime.Now.AddHours(20),
+                        TicketQuantity = 2,
+                        HasBeenRedeemed = false
+                    },
+                    new TicketReservation
+                    {
+                        Id = Guid.NewGuid(),
+                        ExpiryTime = DateTime.Now.AddHours(12),
+                        TicketQuantity = 14,
+                        HasBeenRedeemed = false
+                    }
+                }
+            };
+
+            //act
+            bool result = Event.CanPurchaseTicketWith(reservationId);
+
+            //assert
+            Assert.IsFalse(result);
+        }
     }
 }
