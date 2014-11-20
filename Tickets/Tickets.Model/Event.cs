@@ -78,5 +78,27 @@ namespace Tickets.Model
 
             return reservationIssue;
         }
+
+        public TicketReservation ReserveTicket(int requestedTicketQuantity)
+        {
+            if (!CanReserveTicket(requestedTicketQuantity))
+                ThrowExceptionWithDetailsOnWhyTicketsCannotBeReserved();
+
+            TicketReservation reservation = TicketReservationFactory.CreateReservation(this, requestedTicketQuantity);
+
+            ReservedTickets.Add(reservation);
+
+            return reservation;
+        }
+
+        public bool CanReserveTicket(int requestedTicketQuantity)
+        {
+            return AvailableAllocation() >= requestedTicketQuantity;
+        }
+
+        private void ThrowExceptionWithDetailsOnWhyTicketsCannotBeReserved()
+        {
+            throw new ApplicationException("There are no tickets available to reserve.");
+        }
     }
 }

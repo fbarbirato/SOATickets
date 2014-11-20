@@ -52,7 +52,7 @@ namespace Tickets.Tests.Unit.Model
 
             var testEvent = new Event
             {
-                Id = reservationId,
+                Id = Guid.NewGuid(),
                 Name = "Test Event",
                 Allocation = 100,
                 ReservedTickets = new List<TicketReservation>()
@@ -82,7 +82,7 @@ namespace Tickets.Tests.Unit.Model
 
             var testEvent = new Event
             {
-                Id = reservationId,
+                Id = Guid.NewGuid(),
                 Name = "Test Event",
                 Allocation = 100,
                 ReservedTickets = new List<TicketReservation>()
@@ -113,7 +113,7 @@ namespace Tickets.Tests.Unit.Model
 
             var testEvent = new Event
             {
-                Id = reservationId,
+                Id = Guid.NewGuid(),
                 Name = "Test Event",
                 Allocation = 100,
                 ReservedTickets = new List<TicketReservation>()
@@ -150,7 +150,7 @@ namespace Tickets.Tests.Unit.Model
 
             var testEvent = new Event
             {
-                Id = reservationId,
+                Id = Guid.NewGuid(),
                 Name = "Test Event",
                 Allocation = 100,
                 ReservedTickets = new List<TicketReservation>()
@@ -180,7 +180,7 @@ namespace Tickets.Tests.Unit.Model
 
             var testEvent = new Event
             {
-                Id = reservationId,
+                Id = Guid.NewGuid(),
                 Name = "Test Event",
                 Allocation = 100,
                 ReservedTickets = new List<TicketReservation>()
@@ -210,7 +210,7 @@ namespace Tickets.Tests.Unit.Model
 
             var testEvent = new Event
             {
-                Id = reservationId,
+                Id = Guid.NewGuid(),
                 Name = "Test Event",
                 Allocation = 100,
                 ReservedTickets = new List<TicketReservation>()
@@ -230,6 +230,132 @@ namespace Tickets.Tests.Unit.Model
 
             //assert
             result.Should().Be(String.Format("There is no ticket reservation with the Id '{0}'", reservationId.ToString()));
-        } 
+        }
+
+        [TestMethod]
+        public void ReserveTicket_TicketsAvailable_ShouldAddNewTicketReservationToReservedTickets()
+        {
+            //arrange
+            var testEvent = new Event
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Event",
+                Allocation = 100,
+                ReservedTickets = new List<TicketReservation>()
+            };
+
+            //act
+            testEvent.ReserveTicket(10);
+
+            //assert
+            testEvent.ReservedTickets.Count.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void ReserveTicket_TicketsAvailable_ShouldReturnNewTicketReservationWithRightAmountOfTickets()
+        {
+            //arrange
+            var requestedTicketQuantity = 10;
+
+            var testEvent = new Event
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Event",
+                Allocation = 100,
+                ReservedTickets = new List<TicketReservation>()
+            };
+
+            //act
+            var result = testEvent.ReserveTicket(requestedTicketQuantity);
+
+            //assert
+            result.Should().BeOfType<TicketReservation>();
+            result.TicketQuantity.Should().Be(10);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void ReserveTicket_TicketsNotAvailable_ShouldThrowException()
+        {
+            //arrange
+            var requestedTicketQuantity = 10;
+
+            var testEvent = new Event
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Event",
+                Allocation = 5,
+                ReservedTickets = new List<TicketReservation>()
+            };
+
+            //act
+            testEvent.ReserveTicket(requestedTicketQuantity);
+
+            //assert
+            
+        }
+
+        [TestMethod]
+        public void CanReserveTicket_TicketQuantityRequestedAvailable_ReturnsTrue()
+        {
+            //arrange
+            var requestedTicketQuantity = 5;
+
+            var testEvent = new Event
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Event",
+                Allocation = 10,
+                ReservedTickets = new List<TicketReservation>()
+            };
+
+            //act
+            var result = testEvent.CanReserveTicket(requestedTicketQuantity);
+
+            //assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void CanReserveTicket_TicketQuantityRequestedExactlyWhatIsAvailable_ReturnsTrue()
+        {
+            //arrange
+            var requestedTicketQuantity = 10;
+
+            var testEvent = new Event
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Event",
+                Allocation = 10,
+                ReservedTickets = new List<TicketReservation>()
+            };
+
+            //act
+            var result = testEvent.CanReserveTicket(requestedTicketQuantity);
+
+            //assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void CanReserveTicket_TicketQuantityRequestedNotAvailable_ReturnsFalse()
+        {
+            //arrange
+            var requestedTicketQuantity = 11;
+
+            var testEvent = new Event
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Event",
+                Allocation = 10,
+                ReservedTickets = new List<TicketReservation>()
+            };
+
+            //act
+            var result = testEvent.CanReserveTicket(requestedTicketQuantity);
+
+            //assert
+            result.Should().BeFalse();
+        }
     }
 }
