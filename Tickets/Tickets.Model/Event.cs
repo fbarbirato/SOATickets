@@ -91,14 +91,47 @@ namespace Tickets.Model
             return reservation;
         }
 
+        private void ThrowExceptionWithDetailsOnWhyTicketsCannotBeReserved()
+        {
+            throw new ApplicationException("There are no tickets available to reserve.");
+        }
+
         public bool CanReserveTicket(int requestedTicketQuantity)
         {
             return AvailableAllocation() >= requestedTicketQuantity;
         }
 
-        private void ThrowExceptionWithDetailsOnWhyTicketsCannotBeReserved()
+        public TicketPurchase PurchaseTicketWith(Guid reservationId)
         {
-            throw new ApplicationException("There are no tickets available to reserve.");
+            if (!CanPurchaseTicketWith(reservationId))
+                throw new ApplicationException(DetermineWhyATicketCannotbePurchasedWith(reservationId));
+
+            TicketReservation reservation = GetReservationWith(reservationId);
+
+            TicketPurchase ticket = TicketPurchaseFactory.CreateTicket(this, reservation.TicketQuantity);
+
+            reservation.HasBeenRedeemed = true;
+
+            PurchasedTickets.Add(ticket);
+
+            return ticket;
+        }
+
+        public string DetermineWhyATicketCannotbePurchasedWith(Guid reservationId)
+        {
+            string reservationIssue = "";
+            if (HasReservationWith(reservationId))
+            {
+                TicketReservation reservation = GetReservationWith(reservationId);
+                if (reservation.HasExpired())
+                    reservationIssue = String.Format("Ticket reservation '{0}' has expired", reservationId.ToString());
+                else if (reservation.HasBeenRedeemed)
+                    reservationIssue = String.Format("Ticket reservation '{0}' has already been redeemed", reservationId.ToString());
+            }
+            else
+                reservationIssue = String.Format("There is no ticket reservation with the Id '{0}'", reservationId.ToString());
+
+            return reservationIssue;
         }
     }
 }
