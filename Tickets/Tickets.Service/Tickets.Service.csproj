@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C9F41BE9-4040-412B-9550-E5DB80F3D5F9}</ProjectGuid>
+    <ProjectGuid>{EFE77EDE-6DCB-441E-BC94-92CDE55FE2B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tickets.Model</RootNamespace>
-    <AssemblyName>Tickets.Model</AssemblyName>
+    <RootNamespace>Tickets.Service</RootNamespace>
+    <AssemblyName>Tickets.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,13 +39,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Event.cs" />
-    <Compile Include="IEventRepository.cs" />
-    <Compile Include="TicketPurchase.cs" />
-    <Compile Include="TicketPurchaseFactory.cs" />
-    <Compile Include="TicketReservation.cs" />
+    <Compile Include="ErrorLog.cs" />
+    <Compile Include="MessageResponseHistory.cs" />
+    <Compile Include="TicketPurchaseExtensionMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TicketReservationFactory.cs" />
+    <Compile Include="TicketReservationExtensionMethods.cs" />
+    <Compile Include="TicketService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tickets.Contracts\Tickets.Contracts.csproj">
+      <Project>{76cb92cf-d956-4169-8aad-0237126cd159}</Project>
+      <Name>Tickets.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tickets.DataContract\Tickets.DataContract.csproj">
+      <Project>{a4373c7a-fa79-4993-a513-2e0e4601e8a0}</Project>
+      <Name>Tickets.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tickets.Model\Tickets.Model.csproj">
+      <Project>{c9f41be9-4040-412b-9550-e5db80f3d5f9}</Project>
+      <Name>Tickets.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tickets.Repository\Tickets.Repository.csproj">
+      <Project>{21975215-0dd1-4bfe-b13c-f54ddd85a105}</Project>
+      <Name>Tickets.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

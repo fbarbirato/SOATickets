@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{3FBDC569-0937-4629-93C8-6B806AB0F102}"
 EndProject
@@ -10,6 +10,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickets.Model", "Tickets.Model\Tickets.Model.csproj", "{C9F41BE9-4040-412B-9550-E5DB80F3D5F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickets.Tests.Unit", "Tickets.Tests.Unit\Tickets.Tests.Unit.csproj", "{0F53D698-E558-46AC-8FBC-F8C97A2C1A63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickets.Repository", "Tickets.Repository\Tickets.Repository.csproj", "{21975215-0DD1-4BFE-B13C-F54DDD85A105}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickets.DataContract", "Tickets.DataContract\Tickets.DataContract.csproj", "{A4373C7A-FA79-4993-A513-2E0E4601E8A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickets.Contracts", "Tickets.Contracts\Tickets.Contracts.csproj", "{76CB92CF-D956-4169-8AAD-0237126CD159}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickets.Service", "Tickets.Service\Tickets.Service.csproj", "{EFE77EDE-6DCB-441E-BC94-92CDE55FE2B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +33,22 @@ Global
 		{0F53D698-E558-46AC-8FBC-F8C97A2C1A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F53D698-E558-46AC-8FBC-F8C97A2C1A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F53D698-E558-46AC-8FBC-F8C97A2C1A63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21975215-0DD1-4BFE-B13C-F54DDD85A105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21975215-0DD1-4BFE-B13C-F54DDD85A105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21975215-0DD1-4BFE-B13C-F54DDD85A105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21975215-0DD1-4BFE-B13C-F54DDD85A105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4373C7A-FA79-4993-A513-2E0E4601E8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4373C7A-FA79-4993-A513-2E0E4601E8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4373C7A-FA79-4993-A513-2E0E4601E8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4373C7A-FA79-4993-A513-2E0E4601E8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76CB92CF-D956-4169-8AAD-0237126CD159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76CB92CF-D956-4169-8AAD-0237126CD159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76CB92CF-D956-4169-8AAD-0237126CD159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76CB92CF-D956-4169-8AAD-0237126CD159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE77EDE-6DCB-441E-BC94-92CDE55FE2B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE77EDE-6DCB-441E-BC94-92CDE55FE2B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE77EDE-6DCB-441E-BC94-92CDE55FE2B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE77EDE-6DCB-441E-BC94-92CDE55FE2B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,5 +56,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C9F41BE9-4040-412B-9550-E5DB80F3D5F9} = {3FBDC569-0937-4629-93C8-6B806AB0F102}
 		{0F53D698-E558-46AC-8FBC-F8C97A2C1A63} = {3FBDC569-0937-4629-93C8-6B806AB0F102}
+		{21975215-0DD1-4BFE-B13C-F54DDD85A105} = {3FBDC569-0937-4629-93C8-6B806AB0F102}
+		{A4373C7A-FA79-4993-A513-2E0E4601E8A0} = {3FBDC569-0937-4629-93C8-6B806AB0F102}
+		{76CB92CF-D956-4169-8AAD-0237126CD159} = {3FBDC569-0937-4629-93C8-6B806AB0F102}
+		{EFE77EDE-6DCB-441E-BC94-92CDE55FE2B0} = {3FBDC569-0937-4629-93C8-6B806AB0F102}
 	EndGlobalSection
 EndGlobal
